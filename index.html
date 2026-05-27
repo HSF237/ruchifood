@@ -1409,16 +1409,22 @@
                 padding: 4.5rem 1.2rem 3rem;
                 text-align: center;
             }
-            .hero-badge { font-size: 0.62rem; letter-spacing: 0.1em; }
-            .hero-desc { max-width: 100%; font-size: 0.85rem; }
+            .hero-title {
+                font-size: clamp(1.65rem, 8.5vw, 2.4rem);
+                line-height: 1.2;
+            }
+            .hero-badge { font-size: 0.62rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+            .hero-subtitle-mal { font-size: 1rem; margin-bottom: 1.2rem; }
+            .hero-desc { max-width: 100%; font-size: 0.88rem; line-height: 1.75; margin-bottom: 1.8rem; }
             .hero-ctas {
                 flex-direction: column; align-items: stretch; gap: 0.75rem;
             }
             .hero-ctas a { text-align: center; padding: 0.9rem 1.5rem; }
             .hero-stats {
                 gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+                margin-top: 2rem; padding-top: 1.5rem;
             }
-            .stat-num { font-size: 1.8rem; }
+            .stat-num { font-size: 1.6rem; }
 
             /* Section padding mobile */
             .section-inner { padding: 3rem 1.2rem; }
@@ -1455,7 +1461,7 @@
             .contact-numbers { flex-direction: column; gap: 0.75rem; }
 
             /* Intro animation — scale for mobile */
-            .intro-logo-center svg { height: 120px !important; }
+            .intro-logo-center img { height: 130px !important; }
 
 
 
@@ -1504,10 +1510,6 @@
         @media (min-width: 1024px) {
             .slide-item { width: 280px; height: 200px; }
             .products-grid { grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); }
-        }
-                width: 220px;
-                height: 160px;
-            }
         }
     </style>
 </head>
@@ -2231,22 +2233,32 @@
             const title = document.getElementById('heroTitle');
             if (!title || title.innerHTML.trim()) return;
             let html = '', ci = 0;
-            const add = (ch, gold) => {
-                if (ch === ' ') {
-                    html += '<span class="char space" style="animation-delay:' + (0.03 * ci + 0.05) + 's">&nbsp;</span>';
-                } else {
+
+            const addWord = (word, gold) => {
+                let inner = '';
+                word.split('').forEach(ch => {
                     const cls   = 'char' + (gold ? ' char-gold' : '');
-                    const style = gold
-                        ? 'animation-delay:' + (0.03 * ci + 0.05) + 's;color:var(--gold);font-style:italic;'
-                        : 'animation-delay:' + (0.03 * ci + 0.05) + 's;';
-                    html += '<span class="' + cls + '" style="' + style + '">' + ch + '</span>';
-                }
-                ci++;
+                    const style = (gold ? 'color:var(--gold);font-style:italic;' : '')
+                        + 'animation-delay:' + (0.03 * ci + 0.05) + 's;';
+                    inner += '<span class="' + cls + '" style="' + style + '">' + ch + '</span>';
+                    ci++;
+                });
+                return '<span style="display:inline-block;white-space:nowrap">' + inner + '</span>';
             };
-            'Taste of '.split('').forEach(c => add(c, false));
-            'Kerala,'.split('').forEach(c => add(c, true));
+
+            const addSpace = () => {
+                const s = '<span class="char space" style="animation-delay:' + (0.03 * ci + 0.05) + 's">&nbsp;</span>';
+                ci++;
+                return s;
+            };
+
+            html += addWord('Taste', false) + addSpace();
+            html += addWord('of', false) + addSpace();
+            html += addWord('Kerala,', true);
             html += '<br>';
-            'Made with Love'.split('').forEach(c => add(c, false));
+            html += addWord('Made', false) + addSpace();
+            html += addWord('with', false) + addSpace();
+            html += addWord('Love', false);
             title.innerHTML = html;
         }
 
