@@ -940,6 +940,39 @@
             transform: scale(1.04);
         }
 
+        .qty-stepper {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid rgba(26,58,42,0.2);
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--green-deep);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            line-height: 1;
+            padding: 0;
+            user-select: none;
+        }
+        .qty-btn:hover { background: rgba(26,58,42,0.08); }
+        .qty-val {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--green-deep);
+            min-width: 24px;
+            text-align: center;
+        }
+
         /* ===================== CUSTOM ===================== */
         .custom-sec {
             background: var(--green-deep);
@@ -1479,8 +1512,8 @@
                 margin-top: auto;
                 padding-top: 0.55rem;
             }
-            .product-price-val { font-size: 1.15rem; }
-            .product-price-unit { font-size: 0.65rem; }
+            .qty-btn { width: 26px; height: 26px; font-size: 1rem; }
+            .qty-val { font-size: 0.78rem; min-width: 20px; }
             .product-order-btn { padding: 0.42rem 0.9rem; font-size: 0.72rem; }
 
             /* Delivery cards — 2 col */
@@ -1819,12 +1852,12 @@
                         <p class="product-desc">പരമ്പരാഗത കരിയപ്പം — അരിമാവും തേങ്ങയും ഉപയോഗിച്ച് ഇരുണ്ട കളത്തിൽ ചുടുന്ന
                             ആധികാരിക നാടൻ വിഭവം.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 5</div>
-                                <div class="product-price-unit">per piece</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Kariyappam%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Kariyappam')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1839,12 +1872,12 @@
                         <p class="product-desc">സ്നേഹത്തോടെ പാകം ചെയ്ത നാടൻ ബിരിയാണി — സുഗന്ധമസാലകൾ, നെയ്യ്, കശുവണ്ടി
                             ചേർത്ത് ഒരു വിരുന്നനുഭവം.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">Ask us</div>
-                                <div class="product-price-unit">custom qty</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Biriyani%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Home Biriyani')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1859,12 +1892,12 @@
                         <p class="product-desc">അരിമാവും മുട്ടയും ചേർത്ത് ഉണ്ടാക്കുന്ന ക്രിസ്പ് ആയ നാടൻ പലഹാരം. ഉത്സവ
                             നേരങ്ങളിൽ ഒഴിവാക്കാനാവാത്ത ഒന്ന്.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 6</div>
-                                <div class="product-price-unit">per piece</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Muttayappam%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Muttayappam')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1879,12 +1912,12 @@
                         <p class="product-desc">ശർക്കരയും അരിയും തേങ്ങയും ചേർത്ത് ഉണ്ടാക്കുന്ന ഒരു ക്ലാസ്സിക് കേരള
                             മധുരം. ഓണം, വിഷു, ഉത്സവ വിശേഷങ്ങൾക്ക് ഏറ്റം ചേരും.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 5</div>
-                                <div class="product-price-unit">per piece</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Ariyunda%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Ariyunda')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1899,11 +1932,12 @@
                         <p class="product-desc">ജന്മദിനം, വിവാഹം, ആഘോഷങ്ങൾക്കായി പ്രത്യേകം ഡെക്കറേറ്റ് ചെയ്ത ഹോം കേക്ക്.
                             ഓർഡർ അനുസരിച്ച് ഡിസൈൻ ചെയ്യും.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">Ask us</div>
-                                <div class="product-price-unit">custom size</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Cake%20order" class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Decorated Cake')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1918,12 +1952,12 @@
                         <p class="product-desc">ക്രിസ്പ് ചിക്കൻ റോൾ, ചേർത്ത് നൽകുന്ന കായ് അട — ടീ-ടൈം സ്നാക്ക്‌സ് ആയി
                             ഏറ്റവും ഇഷ്ടം.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">Ask us</div>
-                                <div class="product-price-unit">per piece</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Chicken%20Roll%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Chicken Roll & Kayi Ada')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1938,12 +1972,12 @@
                         <p class="product-desc">വീട്ടിൽ ഉണ്ടാക്കിയ ബട്ടർ കുക്കീസ് — ഉരുണ്ട ആകൃതിയിൽ, ക്രഞ്ചി, ഏത്
                             പ്രായക്കാർക്കും ഇഷ്ടമാകും.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 180</div>
-                                <div class="product-price-unit">per 250g</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Cookies%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Bakery Cookies')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1958,12 +1992,12 @@
                         <p class="product-desc">സോഫ്റ്റ്, ഫ്ലഫ്ഫി സ്‌പോഞ്ച് കേക്ക് — ഡെക്കറേഷൻ ഇല്ലാതെ ശുദ്ധമായ
                             രുചിയോടെ. ഏത് ഓക്കേഷനും പറ്റും.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 350</div>
-                                <div class="product-price-unit">per kg</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Sponge%20Cake%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Plain Sponge Cake')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -1978,12 +2012,12 @@
                         <p class="product-desc">നേന്ത്രപ്പഴവും വാൾനട്ടും ചേർത്ത് ഉണ്ടാക്കുന്ന ഒരു നാടൻ കേരളീയ കേക്ക്.
                             ചൂടുചായക്ക് ഒപ്പം ഏറ്റം ചേർച്ചയുള്ളത്.</p>
                         <div class="product-footer">
-                            <div>
-                                <div class="product-price-val">₹ 320</div>
-                                <div class="product-price-unit">per cake</div>
+                            <div class="qty-stepper">
+                                <button class="qty-btn" onclick="qtyChange(this,-1)">−</button>
+                                <span class="qty-val">1</span>
+                                <button class="qty-btn" onclick="qtyChange(this,1)">+</button>
                             </div>
-                            <a href="https://wa.me/917306493522?text=Banana%20Cake%20order"
-                                class="product-order-btn">Order</a>
+                            <button class="product-order-btn" onclick="orderProduct(this,'Banana Walnut Cake')">Order</button>
                         </div>
                     </div>
                 </div>
@@ -2297,6 +2331,25 @@
         }
 
         // ======= WHATSAPP ORDER FORM =======
+        function qtyChange(btn, delta) {
+            const val = btn.closest('.qty-stepper').querySelector('.qty-val');
+            let n = parseInt(val.textContent) + delta;
+            if (n < 1) n = 1;
+            if (n > 99) n = 99;
+            val.textContent = n;
+        }
+
+        function orderProduct(btn, item) {
+            const qty = btn.closest('.product-footer').querySelector('.qty-val').textContent;
+            const msg = '🍽️ *Ruchi Food Products — Order Enquiry*\n'
+                + '━━━━━━━━━━━━━━━━━━\n'
+                + '🛒 *Item:* ' + item + '\n'
+                + '📦 *Quantity:* ' + qty + '\n'
+                + '━━━━━━━━━━━━━━━━━━\n'
+                + 'Please let me know the price and availability. Thank you!';
+            window.open('https://wa.me/917306493522?text=' + encodeURIComponent(msg), '_blank');
+        }
+
         function sendOrderWA(e) {
             e.preventDefault();
             var name  = document.getElementById("ofName").value.trim();
