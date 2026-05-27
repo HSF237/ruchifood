@@ -1437,17 +1437,51 @@
             /* Gallery mobile */
             .slide-item { width: 180px; height: 140px; }
 
-            /* Products mobile — 2 col grid */
+            /* Products mobile — horizontal swipe cards */
             .products-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.75rem;
+                grid-template-columns: 1fr;
+                gap: 0.7rem;
             }
-            .product-img { height: 140px; }
-            .product-body { padding: 0.8rem 0.8rem 1rem; }
-            .product-name { font-size: 0.9rem; }
-            .product-desc { font-size: 0.72rem; }
-            .product-price { font-size: 1rem; }
-            .product-order-btn { padding: 0.5rem 0.8rem; font-size: 0.72rem; }
+            .product-card {
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                border-radius: 0.85rem;
+            }
+            .product-img {
+                width: 115px;
+                height: auto;
+                min-height: 120px;
+                flex-shrink: 0;
+                border-radius: 0.85rem 0 0 0.85rem;
+            }
+            .product-img img {
+                border-radius: 0.85rem 0 0 0.85rem;
+            }
+            .product-badge {
+                top: 0.55rem;
+                right: auto;
+                left: 0.55rem;
+                font-size: 0.6rem;
+                padding: 0.15rem 0.5rem;
+            }
+            .product-body {
+                flex: 1;
+                padding: 0.85rem 0.9rem 0.85rem;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+            }
+            .product-name-mal { font-size: 1.05rem; margin-bottom: 0.05rem; }
+            .product-name-en { font-size: 0.65rem; margin-bottom: 0.4rem; }
+            .product-desc { display: none; }
+            .product-footer {
+                margin-top: auto;
+                padding-top: 0.55rem;
+            }
+            .product-price-val { font-size: 1.15rem; }
+            .product-price-unit { font-size: 0.65rem; }
+            .product-order-btn { padding: 0.42rem 0.9rem; font-size: 0.72rem; }
 
             /* Delivery cards — 2 col */
             .delivery-cards { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
@@ -1474,7 +1508,7 @@
 
         /* --- Small phones extra squeeze (≤360px) --- */
         @media (max-width: 360px) {
-            .products-grid { grid-template-columns: 1fr; }
+            .product-img { width: 95px; }
             .delivery-cards { grid-template-columns: 1fr; }
             .hero-stats { gap: 1rem; }
             .ruchi-logo-svg { height: 38px; }
