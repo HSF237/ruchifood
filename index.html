@@ -2462,7 +2462,7 @@
                                 straight to you — hot and fresh.</div>
                         </li>
                     </ul>
-                    <a href="https://wa.me/917306493522?text=Custom%20order" class="btn-primary reveal"
+                    <a href="#contact" class="btn-primary reveal"
                         style="margin-top:2rem;display:inline-block;">Start a Custom Order</a>
                 </div>
                 <div class="custom-visual reveal">
@@ -2539,35 +2539,39 @@
                         <div class="of-row">
                             <div class="of-field of-field-wide">
                                 <label for="ofItem">What do you want to order?</label>
-                                <select id="ofItem" required>
-                                    <option value="">-- Select item --</option>
-                                    <option>Kalathappam</option>
-                                    <option>Biryani</option>
-                                    <option>Cake</option>
-                                    <option>Rice Balls (Piriyada)</option>
-                                    <option>Pathiri</option>
-                                    <option>Chicken Roll</option>
-                                    <option>Kaiyada</option>
-                                    <option>Neyyappam</option>
-                                    <option>Pickle (Achar)</option>
-                                    <option>Custom / Other</option>
+                                <select id="ofItem" required onchange="updateQtyHint(this)">
+                                    <option value="">-- ഇനം തിരഞ്ഞെടുക്കുക --</option>
+                                    <option value="കാരിയപ്പം" data-unit="pieces">കാരിയപ്പം (Kaariyappam)</option>
+                                    <option value="ബിരിയദ" data-unit="kg">ബിരിയദ (Biriyada)</option>
+                                    <option value="മുട്ടയപ്പം" data-unit="pieces">മുട്ടയപ്പം (Muttayappam)</option>
+                                    <option value="അരിയുണ്ട" data-unit="pieces">അരിയുണ്ട (Ariyunda)</option>
+                                    <option value="ഡെക്കറേറ്റഡ് കേക്ക്" data-unit="kg">ഡെക്കറേറ്റഡ് കേക്ക് (Decorated Cake)</option>
+                                    <option value="കായ് അട ചിക്കൻ റോൾ" data-unit="pieces">കായ് അട ചിക്കൻ റോൾ (Kaai Ada)</option>
+                                    <option value="നെയ്ഫത്തൽ" data-unit="pieces">നെയ്ഫത്തൽ (Neyphathal)</option>
+                                    <option value="സ്‌പോഞ്ച് കേക്ക്" data-unit="kg">സ്‌പോഞ്ച് കേക്ക് (Sponge Cake)</option>
+                                    <option value="ബനാന വാൾനട്ട് കേക്ക്" data-unit="kg">ബനാന വാൾനട്ട് കേക്ക് (Banana Walnut Cake)</option>
+                                    <option value="Custom / Other" data-unit="pieces">Custom / Other</option>
                                 </select>
                             </div>
                         </div>
                         <div class="of-row">
                             <div class="of-field">
-                                <label for="ofQty">Quantity</label>
-                                <input type="text" id="ofQty" placeholder="e.g. 2 kg / 10 pieces" required>
+                                <label for="ofQty" id="ofQtyLabel">എണ്ണം / Quantity</label>
+                                <input type="text" id="ofQty" placeholder="e.g. 10 pieces" required>
                             </div>
                             <div class="of-field">
-                                <label for="ofDate">Delivery Date</label>
+                                <label for="ofDate">ഡെലിവറി തീയതി / Delivery Date</label>
                                 <input type="date" id="ofDate" required>
                             </div>
                         </div>
                         <div class="of-field">
-                            <label for="ofNote">Special Note (optional)</label>
+                            <label for="ofLocation">ഡെലിവറി ലൊക്കേഷൻ / Delivery Location</label>
+                            <input type="text" id="ofLocation" placeholder="e.g. Calicut, near XYZ landmark" required>
+                        </div>
+                        <div class="of-field">
+                            <label for="ofNote">കുറിപ്പ് / Special Note (optional)</label>
                             <textarea id="ofNote" rows="2"
-                                placeholder="e.g. less spicy, home delivery needed..."></textarea>
+                                placeholder="e.g. less spicy, extra gravy..."></textarea>
                         </div>
                         <button type="submit" class="of-submit">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -2763,16 +2767,30 @@
             window.open('https://wa.me/917306493522?text=' + encodeURIComponent(msg), '_blank');
         }
 
+        function updateQtyHint(sel) {
+            var opt = sel.options[sel.selectedIndex];
+            var unit = opt ? opt.getAttribute('data-unit') : 'pieces';
+            var qtyInput = document.getElementById('ofQty');
+            var qtyLabel = document.getElementById('ofQtyLabel');
+            if (unit === 'kg') {
+                qtyInput.placeholder = 'e.g. 1 kg, 0.5 kg';
+                qtyLabel.textContent = 'അളവ് (kg) / Quantity (kg)';
+            } else {
+                qtyInput.placeholder = 'e.g. 10 pieces, 5 nos';
+                qtyLabel.textContent = 'എണ്ണം / Quantity';
+            }
+        }
+
         function sendOrderWA(e) {
             e.preventDefault();
-            var name = document.getElementById("ofName").value.trim();
-            var phone = document.getElementById("ofPhone").value.trim();
-            var item = document.getElementById("ofItem").value;
-            var qty = document.getElementById("ofQty").value.trim();
-            var date = document.getElementById("ofDate").value;
-            var note = document.getElementById("ofNote").value.trim();
+            var name     = document.getElementById("ofName").value.trim();
+            var phone    = document.getElementById("ofPhone").value.trim();
+            var item     = document.getElementById("ofItem").value;
+            var qty      = document.getElementById("ofQty").value.trim();
+            var date     = document.getElementById("ofDate").value;
+            var location = document.getElementById("ofLocation").value.trim();
+            var note     = document.getElementById("ofNote").value.trim();
 
-            // Format date nicely
             var d = date ? new Date(date + "T00:00:00") : null;
             var dateStr = d ? d.toLocaleDateString("ml-IN", { day: "numeric", month: "long", year: "numeric" }) : "പറഞ്ഞിട്ടില്ല";
 
@@ -2784,9 +2802,10 @@
                 "🛒 *ഇനം:* " + item + "\n" +
                 "📦 *എണ്ണം:* " + qty + "\n" +
                 "📅 *ഡെലിവറി തീയതി:* " + dateStr + "\n" +
+                "📍 *ലൊക്കേഷൻ:* " + location + "\n" +
                 (note ? "📝 *കുറിപ്പ്:* " + note + "\n" : "") +
                 "━━━━━━━━━━━━━━━━━━\n" +
-                "ruchifoodproducts.com വഴി അയച്ചത്";
+                "hsf237.github.io/ruchifood/ വഴി അയച്ചത്";
 
             window.open("https://wa.me/917306493522?text=" + encodeURIComponent(msg), "_blank");
         }
